@@ -1,0 +1,206 @@
+/* NAVBAR CONTAINER */
+.navbar {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 1000;
+  padding: 16px 0;
+  background-color: transparent;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+}
+
+/* INNER WRAPPER */
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 24px;
+}
+
+/* LEFT SECTION */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.logo-img {
+  height: 50px;
+  max-width: 150px;
+  object-fit: contain;
+}
+
+.company-name {
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+
+/* CENTER MENU */
+.nav-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-center li {
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-center li:hover {
+  color: #00bfff;
+}
+
+/* DROPDOWN BASE */
+.dropdown {
+  position: relative;
+}
+
+/* DROPDOWN CONTENT CONTAINER (About & Industries) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px;
+  max-width: 95vw;
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  color: black;
+  z-index: 999;
+  display: none;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+/* Hover reveal */
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
+
+/* Shared dropdown sections */
+.dropdown-left,
+.dropdown-links,
+.dropdown-image,
+.dropdown-partners {
+  flex: 1;
+  padding: 0 20px;
+}
+
+/* LEFT PANEL: Blue box */
+.dropdown-left {
+  background-color: #00517B;
+  color: white;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.dropdown-left h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.dropdown-left p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.learn-more-btn {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+/* CENTER: Link groups */
+.dropdown-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-links li {
+  font-size: 15px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  color: #333;
+}
+
+.dropdown-links li:hover {
+  color: #00517B;
+}
+
+/* RIGHT: Image section (About us) */
+.dropdown-image img {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.dropdown-image p {
+  font-size: 14px;
+  color: #333;
+}
+
+/* RIGHT: Brand section (Industries) */
+.dropdown-partners h4 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.dropdown-partners img {
+  width: 120px;
+  height: auto;
+  margin-bottom: 8px;
+  object-fit: contain;
+}
+
+/* RIGHT BUTTONS */
+.nav-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-right a,
+.nav-right button {
+  color: white;
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid white;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-right button:hover,
+.nav-right a:hover {
+  background-color: white;
+  color: #003366;
+}

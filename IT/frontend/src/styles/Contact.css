@@ -1,0 +1,53 @@
+/* HERO SECTION */
+.contact-hero {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.contact-banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contact-overlay {
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 81, 123, 0.8); /* blue overlay */
+  padding: 30px 50px;
+  border-radius: 5px;
+}
+
+.contact-overlay h1 {
+  color: white;
+  font-size: 36px;
+  margin: 0;
+}
+
+/* INFO SECTION */
+.contact-info-section {
+  background-color: white;
+  padding: 60px 30px;
+  text-align: center;
+}
+
+.contact-info-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.contact-info-container p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+.contact-details p {
+  font-size: 17px;
+  color: #333;
+  margin: 8px 0;
+}

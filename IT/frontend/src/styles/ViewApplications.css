@@ -1,0 +1,72 @@
+.applications-section {
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.applications-section h4 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.applications-section table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.applications-section th,
+.applications-section td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+}
+
+.applications-section th {
+  background-color: #f1f1f1;
+  font-weight: 600;
+}
+
+.applications-section td a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.applications-section td a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+  .applications-section table,
+  .applications-section thead,
+  .applications-section tbody,
+  .applications-section th,
+  .applications-section td,
+  .applications-section tr {
+    display: block;
+  }
+
+  .applications-section th {
+    display: none;
+  }
+
+  .applications-section td {
+    position: relative;
+    padding-left: 50%;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .applications-section td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    top: 12px;
+    font-weight: bold;
+    color: #555;
+  }
+}

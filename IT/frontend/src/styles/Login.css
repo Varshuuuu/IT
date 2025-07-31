@@ -1,0 +1,190 @@
+/* Page Wrapper */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('/images/bg.jpg') no-repeat center center;
+  background-size: cover;
+  padding: 40px;
+  position: relative;
+}
+
+/* Dark overlay over background */
+.login-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* darker for contrast */
+  z-index: 0;
+}
+
+/* Main Card Layout */
+.login-card {
+  display: flex;
+  z-index: 1;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 900px;
+  max-width: 100%;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Left Side: Login Form */
+.login-left {
+  flex: 1;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+}
+
+.login-left h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #222;
+}
+
+.login-left label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.login-left input,
+.login-left select {
+  padding: 12px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.login-left input:focus,
+.login-left select:focus {
+  border-color: #007bff;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Login Button */
+.login-btn {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Forgot Password */
+.forgot-link {
+  text-align: center;
+  font-size: 13px;
+  color: #007bff;
+  margin-top: 10px;
+  display: block;
+  text-decoration: underline;
+}
+
+/* Right Side: Register Panel */
+.login-right {
+  flex: 1;
+  background: linear-gradient(135deg, #6200ea, #2196f3);
+  color: white;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.login-right h3 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.login-right p {
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register-now-btn {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.register-now-btn:hover {
+  background-color: white;
+  color: #0056b3;
+}
+.profile-upload-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.profile-upload {
+  width: 120px;
+  height: 120px;
+  border: 2px dashed #ccc;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  transition: border-color 0.3s ease;
+}
+
+.profile-upload:hover {
+  border-color: #007bff;
+}
+
+.upload-icon {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.profile-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
