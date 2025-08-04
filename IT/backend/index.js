@@ -6,6 +6,9 @@ const bcrypt = require("bcrypt");
 const path = require("path");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
+const { extractTextFromFile, calculateMatchScore } = require("./ats/atsScanner");
+
+
 
 const JWT_SECRET = "your_jwt_secret";
 const app = express();
@@ -28,18 +31,36 @@ app.use((req, res, next) => {
   next();
 });
 
-// --- MYSQL CONNECTION ---
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Manoj@2505",
-  database: "db",
-  port:3307
-});
-db.connect(err => {
-  if (err) console.error("❌ Database connection failed:", err);
-  else console.log("✅ Connected to MySQL database");
-});
+let db;
+function handleDBConnection() {
+  db = mysql.createConnection({
+    host: "192.168.1.15",   // ✅ Server IP for remote access
+    user: "root",
+    password: "Manoj@2505",
+    database: "db",
+    port:3307
+  });
+
+  db.connect(err => {
+    if (err) {
+      console.error("❌ Database connection failed:", err);
+      setTimeout(handleDBConnection, 2000); // Retry connection
+    } else {
+      console.log("✅ Connected to MySQL database");
+    }
+  });
+
+  db.on("error", err => {
+    console.error("⚠️ MySQL Error:", err);
+    if (err.code === "PROTOCOL_CONNECTION_LOST") {
+      console.log("🔄 Reconnecting to MySQL...");
+      handleDBConnection();
+    } else {
+      throw err;
+    }
+  });
+}
+handleDBConnection();
 
 // --- MULTER CONFIGURATION ---
 const photoStorage = multer.diskStorage({
@@ -345,6 +366,68 @@ if (fs.existsSync(clientPath)) {
     res.sendFile(path.join(clientPath, "index.html"));
   });
 }
+
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.static('uploads')); // Serve static files
+app.use('/uploads/resumes', express.static(path.join(__dirname, 'uploads', 'resumes')));
+
+// Create resumes upload directory if not exists
+const resumeUploadDir = path.join(__dirname, 'uploads', 'resumes');
+if (!fs.existsSync(resumeUploadDir)) {
+  fs.mkdirSync(resumeUploadDir, { recursive: true });
+}
+
+
+
+
+// ✅ Route: Upload resume + ATS scoring
+app.post("/api/applications/upload", uploadResume.single("resume"), async (req, res) => {
+  const { full_name, email, job_id } = req.body;
+
+  if (!req.file || !full_name || !email || !job_id) {
+    return res.status(400).json({ message: "❌ Missing required fields or resume file" });
+  }
+
+  try {
+    const resumeText = await extractTextFromFile(req.file.path);
+    const jobKeywords = ["react", "node", "javascript", "mysql", "html", "css", "api"]; // Customize as needed
+    const atsScore = calculateMatchScore(resumeText, jobKeywords);
+
+    const sql = `
+      INSERT INTO applications (full_name, email, resume_path, job_id, submitted_at, ats_score)
+      VALUES (?, ?, ?, ?, NOW(), ?)
+    `;
+    const values = [full_name, email, req.file.filename, job_id, atsScore];
+
+    db.query(sql, values, (err) => {
+      if (err) return res.status(500).json({ message: "Database error", error: err });
+      res.json({ message: "✅ Resume submitted and scored", atsScore });
+    });
+  } catch (error) {
+    console.error("❌ ATS scanning failed:", error);
+    res.status(500).json({ message: "Failed to scan resume", error });
+  }
+});
+
+// ✅ Route: Get all scanned resumes
+app.get("/api/applications/scanned", (req, res) => {
+  const sql = `
+    SELECT full_name, email, job_id, resume_path, ats_score, submitted_at
+    FROM applications
+    ORDER BY ats_score DESC
+  `;
+  db.query(sql, (err, results) => {
+    if (err) return res.status(500).json({ error: "Failed to fetch scanned resumes" });
+    res.json(results);
+  });
+});
+
+// ✅ Other existing routes
+const applicationsRoute = require('./routes/applications');
+app.use('/api/applications', applicationsRoute);
+
 
 // --- START SERVER ---
 app.listen(PORT, () => {

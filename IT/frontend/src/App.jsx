@@ -13,6 +13,7 @@ import ScrollToTop from './components/ScrollToTop';
 import ProtectedRoute from './components/ProtectedRoute';
 import EmployeeDashboard from "./components/EmployeeDashboard";
 import TrackApplication from './components/TrackApplication';
+import ATSScanner from './components/ATSScanner'; 
 const App = () => {
   return (
     <Router>
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/track-application" element={<TrackApplication />} />
         <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
         <Route path="/apply/:id" element={<JobApplication />} />
+        <Route path="/admin/ats-scanner" element={<ATSScanner />} />
         <Route
           path="/admin"
           element={

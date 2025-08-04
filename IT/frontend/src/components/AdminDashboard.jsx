@@ -279,7 +279,10 @@ const AdminDashboard = () => {
             <li onClick={() => setView('employees')} className={view === 'employees' ? 'active' : ''}>👤 Employees</li>
             <li onClick={() => setView('jobs')} className={view === 'jobs' ? 'active' : ''}>💼 Job Postings</li>
             <li onClick={() => setView('applications')} className={view === 'applications' ? 'active' : ''}>📄 Applications</li>
+            <li> <a href="/admin/ats-scanner">ATS Resume Scanner</a></li>
+
             <li onClick={handleSignOut}>🚪 Sign Out</li>
+
           </ul>
         </nav>
       </aside>
